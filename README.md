@@ -15,7 +15,7 @@ TECH::MASTER TECH::EXPERT 基礎カリキュラム 学習到達度試験2 (模�
 ```
 before_action :authenticate_user!, except: :new
 ```
-after:      
+- after:      
 
 ```
 before_action :authenticate_user!
