@@ -84,14 +84,17 @@ private
 とだけにした時に、レビューを登録出来るように修正を行って下さい。
 
 before: 
-after:    def create
-            current_user.reviews.create(create_params)
-            redirect_to controller: :products, action: :index
-          end
+after:    
+```
+def create
+  current_user.reviews.create(create_params)
+  redirect_to controller: :products, action: :index
+end
 
-          private
-            def create_params
-            params.require(:review).permit(:rate, :review).merge(product_id: params[:product_id])
-          end
+private
+def create_params
+  params.require(:review).permit(:rate, :review).merge(product_id: params[:product_id])
+end
+```
 作業ファイル: reviews_controller.rb
 解説:
