@@ -108,7 +108,11 @@ after:
 (6)/users/1のユーザーのマイページに遷移した時に、NoMethodErrorが出て、画面を表示することが出来なくなっているので、画面を表示出来るように修正をして下さい。
 
 
-after:      has_many :reviewsの追記
+after:      
+
+```
+has_many :reviews
+```
 作業ファイル: app/models/user.rb
 解説:
 
