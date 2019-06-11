@@ -75,13 +75,17 @@ end
 (4)投稿ランキングが表示されていないので、renderメソッドを追加して表示出来るように修正して下さい。
 
 before: 
+
+```
+<% @ranking.each_with_index(1) do | product,i | %>
+```
 after:    
 
 ```
+<% @ranking.each_with_index(1) do | product,i | %>
 <%= render partial: "ranking/ranking", locals: { product: product, i: i } %>
 ```
 作業ファイル: app/views/layouts/review_site.html.erb
-            <% @ranking.each_with_index(1) do | product,i | %>の行下に追記
 解説:
 
 (5)link_toへの書き換え問題
@@ -126,7 +130,7 @@ private
 
 
 after:  
-  
+
 ```
 def create
   current_user.reviews.create(create_params)
