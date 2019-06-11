@@ -10,10 +10,12 @@ mooovi-exam1
 (1)非ログイン状態で作品の個別ページから「この作品を投稿する」をクリックするとレビュー投稿画面へ遷移できてしまう。
 
 before:     
+
 ```
 before_action :authenticate_user!, except: :new
 ```
 after:      
+
 ```
 before_action :authenticate_user!
 ```
@@ -26,10 +28,12 @@ before_action :authenticate_user!
 「hogehoge」と検索を行って、検索結果が表示されるように修正して下さい。
 
 before:     
+
 ```
 @products = Product.where('detail LIKE(?)', "%#{params[:keyword]}%")
 ```
 after:      
+
 ```
 @products = Product.where('title LIKE(?)', "%#{params[:keyword]}%")
 ```
@@ -39,22 +43,26 @@ after:
 (3)レビューが投稿したが、レビューが反映されないので反映されるようにして下さい。
 
 before:     
+
 ```
 <%= f.text_area :rate, placeholder: 'レビューを書いてね！', style: 'width: 100%;height: 300px;' %>
 ```
 after:      
+
 ```
 <%= f.text_area :review, placeholder: 'レビューを書いてね！', style: 'width: 100%;height: 300px;' %>
 ```
 作業ファイル: app/views/reviews/new.html.erb
 
 before: 
+
 ```
 def create_params
   params.require(:review).permit(:rate).merge(product_id: params[:product_id], user_id: current_user.id)
 end
 ```
 after:  
+
 ```
 def create_params
   params.require(:review).permit(:rate, :review).merge(product_id: params[:product_id], user_id: current_user.id)
@@ -67,7 +75,8 @@ end
 (4)投稿ランキングが表示されていないので、renderメソッドを追加して表示出来るように修正して下さい。
 
 before: 
-after:      
+after:    
+
 ```
 <%= render partial: "ranking/ranking", locals: { product: product, i: i } %>
 ```
@@ -84,7 +93,8 @@ app/views/layouts/review_site.html.erbにおいて
 この部分をlink_toを使って書き換えを行って下さい。
 
 
-after:      
+after:     
+
 ```
 <%= link_to  "マイページ", user_path(current_user) %>
 ```
@@ -115,7 +125,8 @@ private
 とだけにした時に、レビューを登録出来るように修正を行って下さい。
 
 
-after:    
+after:  
+  
 ```
 def create
   current_user.reviews.create(create_params)
